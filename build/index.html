@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Build — Sungho Park</title>
+  <meta name="description" content="Sungho Park builds LLM systems for real business workflows — the model proposes, a rule or a person decides.">
+  <meta property="og:title" content="Build — Sungho Park">
+  <meta property="og:description" content="LLM systems for real business workflows. The model proposes; rules or people decide.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="face-build">
+  <header class="bar">
+    <div class="wrap">
+      <a class="name" href="../">Sungho Park</a>
+      <div class="right">
+        <a class="toggle" href="../run/" aria-label="Switch to Run: event operations and interpreting">
+          <span>Build</span><span class="mark" aria-hidden="true">◐</span><span class="off">Run</span>
+        </a>
+        <a class="cv-btn" href="../cv/sungho-park-cv-build-en.pdf">CV ↓</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <p class="kicker mono">Build — data &amp; applied AI · Munich</p>
+      <h1>I build LLM systems for real business workflows — and I design them so that the model proposes, and a rule or a person decides.</h1>
+      <p class="sub">M.Sc. Data Engineering and Analytics at TUM, B.Sc. Computer Science plus Statistics at LMU. Interested in applied AI, process mining and value engineering; academically in 3D vision and video understanding.</p>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <p class="label"><b>01</b> Numbers behind the code</p>
+        <dl class="numbers">
+          <div><dt>~95%</dt><dd>of the dealership's orders arrive by phone (owner's estimate) — the problem my last two systems attack</dd></div>
+          <div><dt>0 wrong</dt><dd>in 78 field values filled live from staged phone calls</dd></div>
+          <div><dt>3.5×</dt><dd>faster per decision than a general LLM (0.43 s vs 1.5 s)</dd></div>
+          <div><dt>447</dt><dd>tests green in the consumer-advice case checker</dd></div>
+          <div><dt>51</dt><dd>offline checks that every quoted claim really is in the source</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="label"><b>02</b> How I build</p>
+        <ol class="flow" aria-label="How a value moves through the systems I build">
+          <li><div><span class="tag">in</span>A phone call or a set of documents</div></li>
+          <li><div><span class="tag">propose</span>The model suggests, from fixed lists</div></li>
+          <li class="key"><div><span class="tag">decide</span>A rule or a person decides</div></li>
+          <li><div><span class="tag">write</span>A bot types it into the old system</div></li>
+          <li><div><span class="tag">check</span>Read back and compare; anything odd goes to a person</div></li>
+        </ol>
+        <ol class="principles">
+          <li><strong>The person has the last word.</strong><span>Machine values show up as suggestions; nothing is sent until a person confirms, and what a person typed is never overwritten.</span></li>
+          <li><strong>Empty beats wrong.</strong><span>When the model isn't confident, the field stays empty — or an earlier guess is taken back.</span></li>
+          <li><strong>Wrap, don't replace.</strong><span>Old systems keep running untouched; a bot drives them through the scripting interface they already have.</span></li>
+          <li><strong>Make the dangerous things impossible, not just avoided.</strong><span>Printing, deleting and final confirmation simply aren't on the bot's list of allowed actions.</span></li>
+          <li><strong>Don't trust a system's own "saved".</strong><span>After saving, the bot reads the document back and compares it with what was meant; anything unexpected goes to a person.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="label"><b>03</b> Selected work</p>
+        <div class="work">
+          <article>
+            <div>
+              <h3>Live call-to-quote autofill</h3>
+              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/live-call-autofill">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>While a repair shop is still on the phone — “a fender for the Vera, no, not left, the right one” — the quote form fills itself in, and the person on the call has the last word. A decision model picks from fixed lists (car, body zone, side, damage), so it can't invent a part; exact part numbers come from the catalogue.</p>
+              <p class="fact">Measured on 22 labelled, staged calls: 74–75 of 78 field values filled, 0 wrong; deciding on partial speech had the draft complete 4–23 s earlier.</p>
+              <figure class="shot">
+                <a href="https://github.com/Sungho-Park-DE/live-call-autofill"><img src="../assets/img/live-call-demo.png" width="1296" height="623" loading="lazy" alt="Demo screen: the caller corrects left to right, the quote draft follows with confidence tags, and the missing damage level is listed as a question to ask"></a>
+                <figcaption>The caller says “left”, then “no, the right one” — the draft follows, and the damage level still missing becomes a question to ask. Keyless demo mode (scripted call); the numbers above come from the real speech-to-text and decision-model adapters.</figcaption>
+              </figure>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>Quote automation for a parts dealership</h3>
+              <p class="meta mono">since 08/2026 · service contract<br><a href="https://github.com/Sungho-Park-DE/legacy-erp-automation">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>A dealership in Korea runs on a legacy ERP built for Internet Explorer and ActiveX. Instead of replacing it, I put a quote web app and a rule-based bot on top: the bot types confirmed quotes into the ERP, reads them back, and stops for a person when anything looks off. No language model at run time. Operated and maintained remotely from Munich.</p>
+              <p class="fact">Production code stays private (customer data); the design and safeguards are published on invented fake systems.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>Case checker for consumer advice — Verbraucherzentrale Bayern</h3>
+              <p class="meta mono">2026 · Legal Loves Tech hackathon, developer in a team of 3<br><a href="https://github.com/Sungho-Park-DE/lex-rex-legal-loves-tech-2026">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>An adviser gets a case — contract, terms, a price-increase letter, often incomplete — and today reads it by hand; the result depends on who is on duty. The checker reads the same documents and returns a verdict in exactly the categories VZ Bayern asked for, a matching template letter, and the reasons, each with a verbatim quote. If something is missing, it names the document and drafts the request. Names never leave the computer, and no language model makes the decision — a deterministic rule engine does.</p>
+              <p class="fact">Follow-up presentation to VZ Bayern, 10/2026.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>Verifiable legal RAG</h3>
+              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/verifiable-legal-rag">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>Even commercial legal AI tools hallucinate in 17–33% of answers (Stanford RegLab, 2025). Here every claim the model makes must carry a verbatim quote that plain code checks against the source — a made-up claim gets a failing badge instead of a persuasive paragraph. Built without frameworks to keep every moving part inspectable.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>LLMs to analyse business models</h3>
+              <p class="meta mono">2025 · Bachelor's thesis, grade 1.3</p>
+            </div>
+            <div class="body">
+              <p>A command-line tool in which a local LLM reads UML and BPMN 2.0 / ARIS models from XML and answers questions about them — with Map-Collapse-Reduce chunking for models too large for the context, and natural-language edits exported back to valid XML.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap cols">
+        <div>
+          <p class="label"><b>04</b> Experience</p>
+          <ul class="list">
+            <li><strong>Software Developer (service contract)</strong> — Shinhwa Automotive Parts, remote<span class="when mono">08/2026 – present</span></li>
+            <li><strong>Student Tutor</strong> — LMU Munich, Institute of Computer Science. Ran my own exercise group in the Software Development Practical<span class="when mono">10/2024 – 08/2025</span></li>
+            <li><strong>Working Student, IT Systems &amp; Database</strong> — Shinhwa Automotive Parts, remote. Parts master data, IT infrastructure<span class="when mono">03/2024 – 09/2025</span></li>
+            <li><strong>Database Management</strong> — Shinhwa Sangsa, Korea<span class="when mono">09/2014 – 09/2016</span></li>
+            <li>Also: Munich Hacking Legal hackathon — developer and PM (RAG pipeline, pitch)<span class="when mono">2026</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="label"><b>05</b> Education</p>
+          <ul class="list">
+            <li><strong>M.Sc. Data Engineering and Analytics</strong>, TUM<span class="when mono">since 04/2026</span></li>
+            <li><strong>B.Sc. Computer Science plus Statistics</strong>, LMU Munich · final grade 1.9<span class="when mono">2021 – 2026</span></li>
+            <li>B.Sc. IT-Systems Engineering, Hasso Plattner Institute (transferred to LMU)<span class="when mono">2020 – 2021</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="label"><b>06</b> Skills</p>
+        <dl class="skills">
+          <dt>Programming</dt><dd>Python, SQL, R, C++, Java</dd>
+          <dt>AI / ML</dt><dd>PyTorch, LangChain, Ollama</dd>
+          <dt>Methods</dt><dd>RAG, LLM evaluation, human-in-the-loop design, rule-based automation, BPMN/UML</dd>
+          <dt>Tools</dt><dd>Git, Docker, Linux, Claude Code</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="label"><b>◐</b> Same skills, two sides</p>
+        <div class="bridge">
+          <span class="head"></span><span class="head cur">Build</span><span class="head">Run</span>
+          <span class="skill">Start from how people actually work</span>
+          <span class="cur-cell">About 95% of the dealership's orders come in by phone, so the quote form fills itself in during the call.</span>
+          <span class="other" data-side="Run">The Kia tour started from what a junior designer would want to learn <em>by experience</em>.</span>
+          <span class="skill">Check, don't assume</span>
+          <span class="cur-cell">After saving, the bot reads the document back and compares it with what was meant.</span>
+          <span class="other" data-side="Run">Before choosing a route, I drove all four candidates myself.</span>
+          <span class="skill">Make the decision easy for whoever owns it</span>
+          <span class="cur-cell">Suggestions come with their confidence; nothing is sent until a person confirms.</span>
+          <span class="other" data-side="Run">Every question to a stakeholder comes with a reason, a deadline and two alternatives.</span>
+          <span class="skill">Design for the bad day</span>
+          <span class="cur-cell">Dangerous actions aren't avoided — they're impossible: they're not on the bot's list.</span>
+          <span class="other" data-side="Run">For a client likely to change plans, I book cancellable options, even at a higher price.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <nav>
+        <a data-mail-user="simonpsh" data-mail-domain="outlook.kr" href="#">Email</a>
+        <a href="https://github.com/Sungho-Park-DE">GitHub</a>
+        <a href="../cv/sungho-park-cv-build-en.pdf">CV (EN)</a>
+        <a href="../cv/sungho-park-cv-build-de.pdf">Lebenslauf (DE)</a>
+      </nav>
+      <span class="mono">© 2026 Sungho Park · <a href="../run/">see the other side ◐</a></span>
+    </div>
+  </footer>
+  <script src="../assets/site.js"></script>
+</body>
+</html>
