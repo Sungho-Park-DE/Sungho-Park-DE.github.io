@@ -38,10 +38,10 @@
         <ol class="principles">
           <li><strong>I learn a process fast.</strong><span>At the parts dealership, the first demo and the first real use came within one week.</span></li>
           <li><strong>I look for where the time goes.</strong><span>The dealership's owner estimates that about 95% of orders come in by phone. So I worked on the phone call, not on another form.</span></li>
-          <li><strong>I change the plan when the facts change.</strong><span>My first design had a general LLM read the call after the caller hung up. Then the goal changed: the quote should fill in during the call, and the draft is decided again every few seconds. So I switched to a decision model that picks from fixed lists. A test confirmed it: the general LLM also made no mistakes but took 1.5 s per answer, the decision model 0.43 s.</span></li>
+          <li><strong>I change the plan when the facts change.</strong><span>My first design had a general LLM read the call after the caller hung up. Then the goal changed: the quote should fill in during the call, and the draft is decided again every few seconds. So I switched to a decision model that picks from fixed lists. In a test both were equally accurate, so speed decided it: the general LLM took 1.5 s per answer, the decision model 0.43 s.</span></li>
           <li><strong>I check my own numbers.</strong><span>A list of top parts per car model looked like it covered 71.9% of order lines in the dealership's sales data (not public). When I used the customer's actual car instead of the car in the parts data, it was 57.3%. That is the number I report. Since then I use only what is known at the time of the call, and test on a later period than the one I built from.</span></li>
-          <li><strong>I keep the tools people already know.</strong><span>The office staff have used the same ERP for decades, and a very different tool would feel strange to them. So the new system stays close to the old one and only removes the steps they did by hand. To see how they really work in it, I log a working day: catalogue screens, ERP requests, calls and prints, in one timeline.</span></li>
-          <li><strong>People make the final call.</strong><span>In my systems, the computer suggests and a person confirms.</span></li>
+          <li><strong>I keep the tools people already know.</strong><span>The office staff have used the same ERP for decades, and a very different tool would feel strange to them. So the new system stays close to the old one and only removes the steps they did by hand. To see how they really work in it, I log a working day: catalogue screens, ERP requests, calls and prints, in one timeline. The staff know about the logging.</span></li>
+          <li><strong>People make the final call.</strong><span>The bot cannot print, delete a document or give the final confirmation; a person does that. Small choices the staff asked me to stop asking them about, like which source a part comes from, the bot makes on its own.</span></li>
         </ol>
       </div>
     </section>
@@ -60,10 +60,10 @@
           <article>
             <div>
               <h3>Quote automation for a parts dealership</h3>
-              <p class="meta mono">since 08/2026 · service contract<br><a href="https://github.com/Sungho-Park-DE/legacy-erp-automation">GitHub ↗</a></p>
+              <p class="meta mono">08–12/2026 · service contract<br><a href="https://github.com/Sungho-Park-DE/legacy-erp-automation">GitHub ↗</a></p>
             </div>
             <div class="body">
-              <p>The dealership runs on an old ERP made for Internet Explorer. I built a web app for taking orders and a bot that types confirmed quotes into the ERP, reads them back, and stops for a person if something looks wrong. Printing and deleting a document are not on the bot's list of allowed actions, so it cannot do them. No language model runs in production. I maintain it remotely from Munich.</p>
+              <p>The dealership runs on an old ERP made for Internet Explorer. I built a web app for taking orders and a bot that types confirmed quotes into the ERP, reads them back, and stops for a person if something looks wrong. Printing and deleting a document are not on the bot's list of allowed actions, so it cannot do them. No language model runs in production. I work on it remotely from Munich, and development ends in 12/2026.</p>
               <p><strong>What I learned.</strong> Logs show what people do, not whether they are happy with it or what they actually want. The bot used to stop when the ERP listed one part under two sources. My rule mostly matched what the staff had picked in the logs, but they did not want to be asked every time. Now the bot always picks: a source with stock first, and parts with no stock are noted in the quote memo. The staff send suggestions like this through a box on the site, and I work through them one by one. Building a first version and changing it from their suggestions can be faster than trying to work everything out from the data.</p>
               <p class="fact">Production code is private (customer data). The design is public, shown on made-up systems, including <a href="https://github.com/Sungho-Park-DE/legacy-erp-automation/blob/main/docs/activity-log.md">how a working day is logged ↗</a>.</p>
             </div>
@@ -75,11 +75,11 @@
             </div>
             <div class="body">
               <p>A prototype: while a repair shop is on the phone, the parts quote fills itself in. The caller says “a fender for the Vera (a car model), left… no, the right one”, and the form follows. A decision model picks from fixed lists (car, body part, side, damage). It says how sure it is, and unsure fields stay empty for the person. Part numbers come from the catalogue, not from the model.</p>
-              <p>It builds on five years of the dealership's sales. I grouped the invoices into accidents (one insurance claim, plus any second claim for the same car within 30 days). 49% of accidents had more than one invoice, and 20% of part lines came on a later one. So the tool treats one accident as the whole repair, not one invoice. On 19 recent accidents, the dealership's quote tool, which looks part numbers up in the catalogue, matched 97% of the sold lines exactly (81% from sales history alone). The damaged zone and side were taken from the sale, so this checks the lookup, not the person's choice.</p>
-              <p class="fact">22 test calls (18 written scripts, 4 staged recordings, English only), 3 runs: 74–75 of 78 values filled, 0 wrong (general LLM: 77 filled, 0 wrong). With this few calls, 0 wrong only means the error rate is probably under about 3%. Not tested yet: real phone audio, other languages.</p>
+              <p>It builds on five years of the dealership's sales (not public; the repository runs on made-up data). I grouped the invoices into accidents (one insurance claim, plus any second claim for the same car within 30 days). 49% of accidents had more than one invoice, and 20% of part lines came on a later one. So the tool treats one accident as the whole repair, not one invoice. On 19 recent accidents, the dealership's quote tool, which looks part numbers up in the catalogue, matched 97% of the sold lines exactly (81% from sales history alone). The damaged zone and side were taken from the sale, so this checks the lookup, not the person's choice.</p>
+              <p class="fact">22 test calls (18 written scripts, 4 synthetic recordings, English only), 3 runs: 74–75 of 78 values filled, 0 wrong (general LLM: 77 filled, 0 wrong). 22 calls, most of them written by me, are too few to put a tight number on the error rate. Not tested yet: real phone audio, other languages.</p>
               <figure class="shot">
                 <a href="https://github.com/Sungho-Park-DE/mid-call-autofill"><img src="../assets/img/live-call-demo.png" width="1296" height="623" loading="lazy" alt="Demo screen: the caller corrects left to right, the quote draft follows with confidence tags, and the missing damage level is listed as a question to ask"></a>
-                <figcaption>Demo: the caller corrects “left” to “right” and the draft follows. The missing damage level shows up as a question to ask. Demo mode with a scripted call. The numbers above use the real decision model on all 22 calls, and the real speech model on the 4 recordings.</figcaption>
+                <figcaption>Demo: the caller corrects “left” to “right” and the draft follows. The missing damage level shows up as a question to ask. Demo mode: a scripted call and the keyword baseline, not the decision model. The numbers above use the real decision model on all 22 calls, and the real speech model on the 4 recordings.</figcaption>
               </figure>
             </div>
           </article>
@@ -90,7 +90,7 @@
             </div>
             <div class="body">
               <p>Consumer advisers check contracts and letters by hand, and the result can depend on who is on duty. Our tool reads the same documents and gives a verdict in the categories VZ Bayern asked for, with a template letter and a quote from the document for each reason. If a document is missing, it says which one. A fixed rule engine makes the decision, not a language model, and names stay on the computer.</p>
-              <p class="fact">The work continues after the hackathon: follow-up presentation to VZ Bayern scheduled for 10/2026.</p>
+              <p class="fact">The work continued after the hackathon: follow-up presentation to VZ Bayern, 10/2026.</p>
             </div>
           </article>
           <article>
@@ -105,10 +105,10 @@
           <article>
             <div>
               <h3>Verifiable legal RAG</h3>
-              <p class="meta mono">2026 · practice project before the legal-tech hackathons<br><a href="https://github.com/Sungho-Park-DE/verifiable-legal-rag">GitHub ↗</a></p>
+              <p class="meta mono">2026 · practice project before the Legal Loves Tech hackathon<br><a href="https://github.com/Sungho-Park-DE/verifiable-legal-rag">GitHub ↗</a></p>
             </div>
             <div class="body">
-              <p>Every claim the model makes must come with a word-for-word quote, and simple code checks that the quote is really in the source (small typos are allowed). If it isn't, the claim is marked as failed. No frameworks, so every step can be inspected.</p>
+              <p>Every claim the model makes must come with a word-for-word quote, and simple code checks that the quote is really in the source. If it isn't, the claim is marked as failed. Near matches (90% similar or more) also pass, with a separate mark, but only if every number and every “not” is the same as in the source. No frameworks, so every step can be inspected.</p>
             </div>
           </article>
         </div>
@@ -120,9 +120,11 @@
         <div>
           <p class="label"><b>03</b> Experience</p>
           <ul class="list">
-            <li><strong>Software Developer (service contract)</strong> — Shinhwa Automotive Parts, KGM parts dealership in Korea, remote. Before that, working student there for parts master data and IT infrastructure (03/2024 – 09/2025)<span class="when mono">08/2026 – present</span></li>
+            <li><strong>Software Developer (service contract)</strong> — KGM parts dealership in Korea, remote. Development ends in 12/2026<span class="when mono">08/2026 – present</span></li>
+            <li><strong>Freelance event operations and interpreting</strong> — alongside my studies, Germany and Europe. 15+ on-site projects (<a href="../run/">see Run</a>)<span class="when mono">03/2019 – 09/2026</span></li>
+            <li><strong>Part-time, IT systems and parts master data</strong> — the same dealership, remote, 8 h/week<span class="when mono">03/2024 – 09/2025</span></li>
             <li><strong>Student Tutor</strong> — LMU Munich, Institute of Computer Science. Ran my own exercise group in the Software Development Practical<span class="when mono">10/2024 – 08/2025</span></li>
-            <li><strong>Database Management</strong> — Shinhwa Automotive Parts, the same dealership. PostgreSQL parts database<span class="when mono">09/2014 – 09/2016</span></li>
+            <li><strong>Database Management</strong> — the same dealership. PostgreSQL parts database<span class="when mono">09/2014 – 09/2016</span></li>
             <li>Also: Munich Hacking Legal hackathon — developer and PM (RAG pipeline, pitch)<span class="when mono">2026</span></li>
           </ul>
         </div>
