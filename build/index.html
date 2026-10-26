@@ -28,19 +28,20 @@
     <div class="wrap hero">
       <p class="kicker mono">Build — data &amp; applied AI · Munich</p>
       <h1>I learn how a business really works, find the step that slows it down, and fix it.</h1>
-      <p class="sub">Master's student in Data Engineering and Analytics at TUM (B.Sc. Computer Science plus Statistics, LMU). Interested in applied AI, process mining and value engineering; academically in 3D vision and video understanding.</p>
+      <p class="sub">Master's student in Data Engineering and Analytics at TUM (B.Sc. Computer Science plus Statistics, LMU), looking for a working-student role in Munich: process mining, value engineering or applied AI. Academically interested in 3D vision and video understanding. German C1 · English C1 · Korean native.</p>
+      <p class="sub">Available from 01/2027 · up to 20 h/week during the semester, full-time in semester breaks.</p>
     </div>
 
     <section>
       <div class="wrap">
         <p class="label"><b>01</b> How I work</p>
         <ol class="principles">
-          <li><strong>I learn a process fast.</strong><span>At the parts dealership, it took one week from my first look at their old ERP to a first demo, and to first real use.</span></li>
-          <li><strong>I look for where the time goes.</strong><span>About 95% of the dealership's orders come in by phone. So I worked on the phone call, not on another form.</span></li>
-          <li><strong>I change the plan when the facts change.</strong><span>A general LLM gave the right answers but was too slow for a live call (1.5 s per answer). I switched to a smaller decision model that answers in 0.43 s.</span></li>
-          <li><strong>I check my own numbers.</strong><span>A list of top parts looked like it covered 71.9% of orders. When I used the customer's actual car instead of the car in the parts data, it was 57.3%. That is the number I report.</span></li>
-          <li><strong>I use what is already there.</strong><span>The dealership's ERP only runs in Internet Explorer. I didn't replace it. A bot works inside it through its own scripting interface, and I run the system remotely from Munich.</span></li>
-          <li><strong>People make the final call.</strong><span>In my systems, the computer suggests and a person confirms. If the computer is unsure, it leaves the field empty instead of guessing.</span></li>
+          <li><strong>I learn a process fast.</strong><span>At the parts dealership, the first demo and the first real use came within one week.</span></li>
+          <li><strong>I look for where the time goes.</strong><span>The dealership's owner estimates that about 95% of orders come in by phone. So I worked on the phone call, not on another form.</span></li>
+          <li><strong>I change the plan when the facts change.</strong><span>My first design had a general LLM read the call after the caller hung up. Then the goal changed: the quote should fill in during the call, and the draft is decided again every few seconds. So I switched to a decision model that picks from fixed lists. A test confirmed it: the general LLM also made no mistakes but took 1.5 s per answer, the decision model 0.43 s.</span></li>
+          <li><strong>I check my own numbers.</strong><span>A list of top parts per car model looked like it covered 71.9% of order lines in the dealership's sales data (not public). When I used the customer's actual car instead of the car in the parts data, it was 57.3%. That is the number I report. Since then I use only what is known at the time of the call, and test on a later period than the one I built from.</span></li>
+          <li><strong>I keep the tools people already know.</strong><span>The office staff have used the same ERP for decades, and a very different tool would feel strange to them. So the new system stays close to the old one and only removes the steps they did by hand. To see how they really work in it, I log a working day: catalogue screens, ERP requests, calls and prints, in one timeline.</span></li>
+          <li><strong>People make the final call.</strong><span>In my systems, the computer suggests and a person confirms.</span></li>
         </ol>
       </div>
     </section>
@@ -50,7 +51,7 @@
         <p class="label"><b>02</b> Projects</p>
         <ol class="flow" aria-label="How a value moves through the systems I build">
           <li><div><span class="tag">in</span>A phone call or a set of documents</div></li>
-          <li><div><span class="tag">propose</span>The model picks from fixed lists</div></li>
+          <li><div><span class="tag">propose</span>A model or a rule suggests a value</div></li>
           <li class="key"><div><span class="tag">decide</span>A rule or a person decides</div></li>
           <li><div><span class="tag">write</span>A bot enters it into the old system</div></li>
           <li><div><span class="tag">check</span>Read back and compare</div></li>
@@ -58,46 +59,38 @@
         <div class="work">
           <article>
             <div>
-              <h3>Live call-to-quote autofill</h3>
-              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/mid-call-autofill">GitHub ↗</a></p>
+              <h3>Quote automation for a parts dealership</h3>
+              <p class="meta mono">since 08/2026 · service contract<br><a href="https://github.com/Sungho-Park-DE/legacy-erp-automation">GitHub ↗</a></p>
             </div>
             <div class="body">
-              <p>While a repair shop is on the phone, the parts quote fills itself in. The caller says “a fender for the Vera, left… no, the right one”, and the form follows. A general LLM was correct but too slow for this, so I used a decision model. It picks from fixed lists (car, body part, side, damage) and is about 3.5 times faster. It leaves a few more fields for the person, but it says how sure it is, so unsure fields stay empty. Part numbers come from the catalogue, not from the model.</p>
-              <p class="fact">22 staged test calls: 74–75 of 78 values filled, 0 wrong (general LLM: 77 filled, 0 wrong).</p>
+              <p>The dealership runs on an old ERP made for Internet Explorer. I built a web app for taking orders and a bot that types confirmed quotes into the ERP, reads them back, and stops for a person if something looks wrong. Printing and deleting a document are not on the bot's list of allowed actions, so it cannot do them. No language model runs in production. I maintain it remotely from Munich.</p>
+              <p><strong>What I learned.</strong> Logs show what people do, not whether they are happy with it or what they actually want. The bot used to stop when the ERP listed one part under two sources. My rule mostly matched what the staff had picked in the logs, but they did not want to be asked every time. Now the bot always picks: a source with stock first, and parts with no stock are noted in the quote memo. The staff send suggestions like this through a box on the site, and I work through them one by one. Building a first version and changing it from their suggestions can be faster than trying to work everything out from the data.</p>
+              <p class="fact">Production code is private (customer data). The design is public, shown on made-up systems, including <a href="https://github.com/Sungho-Park-DE/legacy-erp-automation/blob/main/docs/activity-log.md">how a working day is logged ↗</a>.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>Live call-to-quote autofill</h3>
+              <p class="meta mono">2026 · personal project, follow-up to the dealership system<br><a href="https://github.com/Sungho-Park-DE/mid-call-autofill">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>A prototype: while a repair shop is on the phone, the parts quote fills itself in. The caller says “a fender for the Vera (a car model), left… no, the right one”, and the form follows. A decision model picks from fixed lists (car, body part, side, damage). It says how sure it is, and unsure fields stay empty for the person. Part numbers come from the catalogue, not from the model.</p>
+              <p>It builds on five years of the dealership's sales. I grouped the invoices into accidents (one insurance claim, plus any second claim for the same car within 30 days). 49% of accidents had more than one invoice, and 20% of part lines came on a later one. So the tool treats one accident as the whole repair, not one invoice. On 19 recent accidents, the dealership's quote tool, which looks part numbers up in the catalogue, matched 97% of the sold lines exactly (81% from sales history alone). The damaged zone and side were taken from the sale, so this checks the lookup, not the person's choice.</p>
+              <p class="fact">22 test calls (18 written scripts, 4 staged recordings, English only), 3 runs: 74–75 of 78 values filled, 0 wrong (general LLM: 77 filled, 0 wrong). With this few calls, 0 wrong only means the error rate is probably under about 3%. Not tested yet: real phone audio, other languages.</p>
               <figure class="shot">
                 <a href="https://github.com/Sungho-Park-DE/mid-call-autofill"><img src="../assets/img/live-call-demo.png" width="1296" height="623" loading="lazy" alt="Demo screen: the caller corrects left to right, the quote draft follows with confidence tags, and the missing damage level is listed as a question to ask"></a>
-                <figcaption>Demo: the caller corrects “left” to “right” and the draft follows. The missing damage level shows up as a question to ask. Demo mode with a scripted call; the numbers above use the real speech and decision models.</figcaption>
+                <figcaption>Demo: the caller corrects “left” to “right” and the draft follows. The missing damage level shows up as a question to ask. Demo mode with a scripted call. The numbers above use the real decision model on all 22 calls, and the real speech model on the 4 recordings.</figcaption>
               </figure>
             </div>
           </article>
           <article>
             <div>
-              <h3>Quote automation for a parts dealership</h3>
-              <p class="meta mono">since 08/2026 · service contract<br><a href="https://github.com/Sungho-Park-DE/legacy-erp-automation">GitHub ↗</a></p>
-            </div>
-            <div class="body">
-              <p>The dealership runs on an old ERP made for Internet Explorer. I built a web app for taking orders and a bot that types confirmed quotes into the ERP, reads them back, and stops for a person if something looks wrong. No language model runs in production. The first demo and first real use came within one week. I maintain it remotely from Munich.</p>
-              <p class="fact">Production code is private (customer data). The design is public, shown on made-up systems.</p>
-            </div>
-          </article>
-          <article>
-            <div>
-              <h3>Case checker for consumer advice — Verbraucherzentrale Bayern</h3>
-              <p class="meta mono">2026 · Legal Loves Tech hackathon, developer in a team of 3<br><a href="https://github.com/Sungho-Park-DE/lex-rex-legal-loves-tech-2026">GitHub ↗</a></p>
+              <h3>Case checker for consumer advice</h3>
+              <p class="meta mono">2026 · Legal Loves Tech hackathon, challenge by Verbraucherzentrale Bayern, developer in a team of 3<br><a href="https://github.com/Sungho-Park-DE/lex-rex-legal-loves-tech-2026">GitHub ↗</a></p>
             </div>
             <div class="body">
               <p>Consumer advisers check contracts and letters by hand, and the result can depend on who is on duty. Our tool reads the same documents and gives a verdict in the categories VZ Bayern asked for, with a template letter and a quote from the document for each reason. If a document is missing, it says which one. A fixed rule engine makes the decision, not a language model, and names stay on the computer.</p>
-              <p class="fact">447 tests pass. Follow-up presentation to VZ Bayern, 10/2026.</p>
-            </div>
-          </article>
-          <article>
-            <div>
-              <h3>Verifiable legal RAG</h3>
-              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/verifiable-legal-rag">GitHub ↗</a></p>
-            </div>
-            <div class="body">
-              <p>Legal AI tools often make things up (17–33% of answers, Stanford RegLab 2025). Here every claim must come with an exact quote, and simple code checks that the quote is really in the source. If it isn't, the claim is marked as failed. No frameworks, so every step can be inspected.</p>
-              <p class="fact">51 offline checks.</p>
+              <p class="fact">The work continues after the hackathon: follow-up presentation to VZ Bayern scheduled for 10/2026.</p>
             </div>
           </article>
           <article>
@@ -106,7 +99,16 @@
               <p class="meta mono">2025 · Bachelor's thesis, grade 1.3</p>
             </div>
             <div class="body">
-              <p>A command-line tool where a local LLM reads UML and BPMN 2.0 / ARIS models stored as XML and answers questions about them. Large models are split into parts (Map-Collapse-Reduce), and edits asked in plain language are written back as valid XML.</p>
+              <p>A command-line tool where a local LLM (Llama 3.2 via Ollama, LangChain) reads UML and BPMN 2.0 / ARIS models stored as XML and answers questions about them. Large models are split into parts (Map-Collapse-Reduce), and edits asked in plain language are written back as valid XML.</p>
+            </div>
+          </article>
+          <article>
+            <div>
+              <h3>Verifiable legal RAG</h3>
+              <p class="meta mono">2026 · practice project before the legal-tech hackathons<br><a href="https://github.com/Sungho-Park-DE/verifiable-legal-rag">GitHub ↗</a></p>
+            </div>
+            <div class="body">
+              <p>Every claim the model makes must come with a word-for-word quote, and simple code checks that the quote is really in the source (small typos are allowed). If it isn't, the claim is marked as failed. No frameworks, so every step can be inspected.</p>
             </div>
           </article>
         </div>
@@ -118,17 +120,16 @@
         <div>
           <p class="label"><b>03</b> Experience</p>
           <ul class="list">
-            <li><strong>Software Developer (service contract)</strong> — Shinhwa Automotive Parts, remote<span class="when mono">08/2026 – present</span></li>
+            <li><strong>Software Developer (service contract)</strong> — Shinhwa Automotive Parts, KGM parts dealership in Korea, remote. Before that, working student there for parts master data and IT infrastructure (03/2024 – 09/2025)<span class="when mono">08/2026 – present</span></li>
             <li><strong>Student Tutor</strong> — LMU Munich, Institute of Computer Science. Ran my own exercise group in the Software Development Practical<span class="when mono">10/2024 – 08/2025</span></li>
-            <li><strong>Working Student, IT Systems &amp; Database</strong> — Shinhwa Automotive Parts, remote. Parts master data, IT infrastructure<span class="when mono">03/2024 – 09/2025</span></li>
-            <li><strong>Database Management</strong> — Shinhwa Sangsa, Korea<span class="when mono">09/2014 – 09/2016</span></li>
+            <li><strong>Database Management</strong> — Shinhwa Automotive Parts, the same dealership. PostgreSQL parts database<span class="when mono">09/2014 – 09/2016</span></li>
             <li>Also: Munich Hacking Legal hackathon — developer and PM (RAG pipeline, pitch)<span class="when mono">2026</span></li>
           </ul>
         </div>
         <div>
           <p class="label"><b>04</b> Education</p>
           <ul class="list">
-            <li><strong>M.Sc. Data Engineering and Analytics</strong>, TUM<span class="when mono">since 04/2026</span></li>
+            <li><strong>M.Sc. Data Engineering and Analytics</strong>, TUM<span class="when mono">04/2026 – 03/2028 (expected)</span></li>
             <li><strong>B.Sc. Computer Science plus Statistics</strong>, LMU Munich · final grade 1.9<span class="when mono">2021 – 2026</span></li>
             <li>B.Sc. IT-Systems Engineering, Hasso Plattner Institute (transferred to LMU)<span class="when mono">2020 – 2021</span></li>
           </ul>
@@ -140,34 +141,15 @@
       <div class="wrap">
         <p class="label"><b>05</b> Skills</p>
         <dl class="skills">
-          <dt>Programming</dt><dd>Python, SQL, R, C++, Java</dd>
-          <dt>AI / ML</dt><dd>PyTorch, LangChain, Ollama</dd>
+          <dt>Programming</dt><dd>Python</dd>
+          <dt>AI / ML</dt><dd>LangChain, Ollama</dd>
           <dt>Methods</dt><dd>RAG, LLM evaluation, human-in-the-loop design, rule-based automation, BPMN/UML</dd>
-          <dt>Tools</dt><dd>Git, Docker, Linux, Claude Code</dd>
+          <dt>Tools</dt><dd>Git, Claude Code</dd>
+          <dt>Languages</dt><dd>German C1 (DSH-3), English C1, Korean native</dd>
         </dl>
       </div>
     </section>
 
-    <section>
-      <div class="wrap">
-        <p class="label"><b>◐</b> Same skills, two sides</p>
-        <div class="bridge">
-          <span class="head"></span><span class="head cur">Build</span><span class="head">Run</span>
-          <span class="skill">Start from how people actually work</span>
-          <span class="cur-cell">About 95% of the dealership's orders come in by phone, so the quote fills itself in during the call.</span>
-          <span class="other" data-side="Run">The Kia tour started from what a junior designer would want to learn <em>by experience</em>.</span>
-          <span class="skill">Check, don't assume</span>
-          <span class="cur-cell">After saving, the bot reads the document back and checks it.</span>
-          <span class="other" data-side="Run">Before choosing a route, I drove all four candidates myself.</span>
-          <span class="skill">Make the decision easy for whoever owns it</span>
-          <span class="cur-cell">The computer suggests and shows how sure it is. Nothing is sent until a person confirms.</span>
-          <span class="other" data-side="Run">Every question to a stakeholder comes with a reason, a deadline and two alternatives.</span>
-          <span class="skill">Design for the bad day</span>
-          <span class="cur-cell">Risky actions like printing or deleting are simply not possible for the bot.</span>
-          <span class="other" data-side="Run">If a client tends to change plans often, I set up bookings from day one so their changes are easy to follow.</span>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
