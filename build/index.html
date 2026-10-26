@@ -59,13 +59,13 @@
           <article>
             <div>
               <h3>Live call-to-quote autofill</h3>
-              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/live-call-autofill">GitHub ↗</a></p>
+              <p class="meta mono">2026 · personal project<br><a href="https://github.com/Sungho-Park-DE/mid-call-autofill">GitHub ↗</a></p>
             </div>
             <div class="body">
               <p>While a repair shop is on the phone, the parts quote fills itself in. The caller says “a fender for the Vera, left… no, the right one”, and the form follows. A general LLM was correct but too slow for this, so I used a decision model. It picks from fixed lists (car, body part, side, damage) and is about 3.5 times faster. It leaves a few more fields for the person, but it says how sure it is, so unsure fields stay empty. Part numbers come from the catalogue, not from the model.</p>
               <p class="fact">22 staged test calls: 74–75 of 78 values filled, 0 wrong (general LLM: 77 filled, 0 wrong).</p>
               <figure class="shot">
-                <a href="https://github.com/Sungho-Park-DE/live-call-autofill"><img src="../assets/img/live-call-demo.png" width="1296" height="623" loading="lazy" alt="Demo screen: the caller corrects left to right, the quote draft follows with confidence tags, and the missing damage level is listed as a question to ask"></a>
+                <a href="https://github.com/Sungho-Park-DE/mid-call-autofill"><img src="../assets/img/live-call-demo.png" width="1296" height="623" loading="lazy" alt="Demo screen: the caller corrects left to right, the quote draft follows with confidence tags, and the missing damage level is listed as a question to ask"></a>
                 <figcaption>Demo: the caller corrects “left” to “right” and the draft follows. The missing damage level shows up as a question to ask. Demo mode with a scripted call; the numbers above use the real speech and decision models.</figcaption>
               </figure>
             </div>
